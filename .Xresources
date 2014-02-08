@@ -1,0 +1,14 @@
+URxvt.font: xft:Ubuntu Mono:pixelsize=16,style=regular
+URxvt*scrollstyle: plain
+URxvt*scrollBar_right: true
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+
+! Configuration for https://github.com/muennich/urxvt-perls
+! and https://github.com/richo/rxvt-unicode/blob/master/src/perl/confirm-paste
+URxvt*perl-ext-common: confirm-paste,default,clipboard-shortcuts
+URxvt.iso14755 : false
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
