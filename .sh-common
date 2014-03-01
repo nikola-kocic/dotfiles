@@ -1,0 +1,18 @@
+export PYTHONDONTWRITEBYTECODE=1 # disable creation of pyc files
+export GREP_OPTIONS="--color"
+export GIT_EDITOR="vim"
+export VISUAL="vim"
+export EDITOR="vim"
+
+alias u="history -n"
+alias rmpyc="find . -name '*.pyc' -delete"
+alias refreshgroups="exec su -l ${USER}"
+alias lsd='ls -lahrt --time-style=full-iso'
+alias sync-project-server='git --git-dir /mnt/project/.git ls-files -z src/ | rsync -vz --exclude config.json --files-from=- --from0 /mnt/project/ project-server:~/project/'
+alias tcmount="truecrypt --mount /mnt/data/project /mnt/project"
+alias project='PROJECT_NAME="project" && \
+        PROJECTPATH="/mnt/${PROJECT_NAME}" && \
+        export PYTHONPATH="${PROJECTPATH}:${PYTHONPATH}" && \
+        source ~/dev/virtualenvs/${PROJECT_NAME}/bin/activate && \
+        cd "${PROJECTPATH}/src" && \
+        if [ ! -d "/run/${PROJECT_NAME}" ]; then sudo install -d -o "${USER}" -g "${USER}" -m750 "/run/${PROJECT_NAME}/"; fi'

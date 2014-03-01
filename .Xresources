@@ -1,9 +1,10 @@
-URxvt.font: xft:Ubuntu Mono:pixelsize=16,style=regular
+URxvt.font: xft:Ubuntu Mono:pixelsize=16:style=regular:antialias=true:hinting=true
 URxvt*scrollstyle: plain
 URxvt*scrollBar_right: true
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
+URxvt*saveLines: 100000
 
 ! Configuration for https://github.com/muennich/urxvt-perls
 ! and https://github.com/richo/rxvt-unicode/blob/master/src/perl/confirm-paste

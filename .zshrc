@@ -17,6 +17,10 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# Prompt with full path
+PS1=$'%{\e[0;32m%}%m%{\e[0m%}:%~> '
+export PS1
+
 setopt inc_append_history       # instantly append
 setopt hist_ignore_all_dups     # no duplicate
 
@@ -48,3 +52,5 @@ bindkey '^[[F' end-of-line
 bindkey "^[[3~" delete-char
 bindkey "^[[5~" up-line-or-history
 bindkey "^[[6~" down-line-or-history
+
+source ~/.sh-common

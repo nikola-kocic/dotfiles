@@ -1,5 +1,13 @@
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" Center screen on next/previous selection.
+nnoremap n nzz
+nnoremap N Nzz
+" Last and next jump should center too.
+nnoremap <C-o> <C-o>zz
+nnoremap <C-i> <C-i>zz
+
+
 set laststatus=2
 hi User1 ctermbg=black ctermfg=white guibg=black  guifg=white
 set statusline=
