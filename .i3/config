@@ -87,9 +87,9 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $w1  1:www
-set $w2  2:comm
+set $w2  2:term-loc
 set $w3  3:geany
-set $w4  4:term-loc
+set $w4  4:comm
 set $w5  5
 set $w6  6
 set $w7  7
@@ -177,10 +177,10 @@ workspace $w8  output DVI-I-1
 workspace $w10 output DVI-I-1
 
 assign [class="Firefox"]     $w1
-assign [class="Thunderbird"] $w2
-assign [class="Pidgin"]      $w2
-assign [class="Skype"]       $w2
 assign [class="Geany"]       $w3
+assign [class="Thunderbird"] $w4
+assign [class="Pidgin"]      $w4
+assign [class="Skype"]       $w4
 assign [class="git-gui"]     $w9
 assign [class="gitg"]        $w9
 assign [class="Eclipse"]     $w10
