@@ -16,3 +16,6 @@ alias project='PROJECT_NAME="project" && \
         source ~/dev/virtualenvs/${PROJECT_NAME}/bin/activate && \
         cd "${PROJECTPATH}/src" && \
         if [ ! -d "/run/${PROJECT_NAME}" ]; then sudo install -d -o "${USER}" -g "${USER}" -m750 "/run/${PROJECT_NAME}/"; fi'
+
+alias srlayout="setxkbmap -option grp:lalt_lshift_toggle -layout usrsl,rs -variant ,yz"
+alias tvim="gvim --servername `gvim --serverlist | head -1` --remote-tab"

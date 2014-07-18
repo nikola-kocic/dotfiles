@@ -1,5 +1,14 @@
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+set number
+
+" Move tabs with alt + left|right
+nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
+
+" Set tab label to show tab number, filename, if modified ('+' is shown if the current window in the tab has been modified)
+:set guitablabel=%N/\ %t\ %M
+
 " Center screen on next/previous selection.
 nnoremap n nzz
 nnoremap N Nzz
