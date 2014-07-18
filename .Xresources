@@ -8,8 +8,9 @@ URxvt*saveLines: 100000
 
 ! Configuration for https://github.com/muennich/urxvt-perls
 ! and https://github.com/richo/rxvt-unicode/blob/master/src/perl/confirm-paste
-URxvt*perl-ext-common: confirm-paste,default,clipboard-shortcuts
+URxvt*perl-ext-common: confirm-paste,default,clipboard-shortcuts,keyboard-select
 URxvt.iso14755 : false
 URxvt.keysym.C-C: perl:clipboard:copy
 URxvt.keysym.C-V: perl:clipboard:paste
 URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
