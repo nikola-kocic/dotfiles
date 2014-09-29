@@ -9,7 +9,7 @@ alias rmpyc="find . -name '*.pyc' -delete"
 alias refreshgroups="exec su -l ${USER}"
 alias lsd='ls -lahrt --time-style=full-iso'
 alias sync-project-server='git --git-dir /mnt/project/.git ls-files -z src/ | rsync -vz --exclude config.json --files-from=- --from0 /mnt/project/ project-server:~/project/'
-alias tcmount="truecrypt --mount /mnt/data/project /mnt/project"
+alias tcmount="truecrypt --text -k="" --protect-hidden=no --mount /mnt/data/project /mnt/project"
 alias project='PROJECT_NAME="project" && \
         PROJECTPATH="/mnt/${PROJECT_NAME}" && \
         export PYTHONPATH="${PROJECTPATH}:${PYTHONPATH}" && \
