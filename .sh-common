@@ -9,7 +9,16 @@ alias rmpyc="find . -name '*.pyc' -delete"
 alias refreshgroups="exec su -l ${USER}"
 alias lsd='ls -lahrt --time-style=full-iso'
 alias sync-project-server='git --git-dir /mnt/project/.git ls-files -z src/ | rsync -vz --exclude config.json --files-from=- --from0 /mnt/project/ project-server:~/project/'
-alias tcmount="truecrypt --text -k="" --protect-hidden=no --mount /mnt/data/project /mnt/project"
+
+mount_tc() {
+    local FILEPATH="${1}"
+    local DESTINATION="${2}"
+    local CONTAINER_NAME="$(basename "${FILEPATH}")"
+    sudo sh -c "cryptsetup --type tcrypt open "${FILEPATH}" "${CONTAINER_NAME}" && mount -o fmask=0177,dmask=0077,uid="$(id --user $(whoami))"  "/dev/mapper/${CONTAINER_NAME}" "${DESTINATION}""
+}
+
+alias tcmount="mount_tc /mnt/data/project /mnt/common"
+
 alias project='PROJECT_NAME="project" && \
         PROJECTPATH="/mnt/${PROJECT_NAME}" && \
         export PYTHONPATH="${PROJECTPATH}:${PYTHONPATH}" && \
