@@ -162,7 +162,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 #        status_command i3status
-        status_command ~/bin/i3-bw 1 /sys/class/net/eth0/statistics/rx_bytes /sys/class/net/eth0/statistics/tx_bytes
+#        status_command ~/bin/i3-bw 1 /sys/class/net/eth0/statistics/rx_bytes /sys/class/net/eth0/statistics/tx_bytes
+        status_command $HOME/bin/conky-i3bar
         tray_output primary
 }
 
