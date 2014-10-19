@@ -34,6 +34,10 @@ URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 URxvt*saveLines: 100000
 
+URxvt*internalBorder: 0
+URxvt.borderColor: #e6e9ed
+URxvt.background: #e6e9ed
+
 ! Configuration for https://github.com/muennich/urxvt-perls
 ! and https://github.com/richo/rxvt-unicode/blob/master/src/perl/confirm-paste
 URxvt*perl-ext-common: confirm-paste,default,clipboard-shortcuts,keyboard-select
@@ -48,7 +52,7 @@ URxvt.keysym.M-Escape: perl:keyboard-select:activate
 *color8:      #656d78
 
 ! WHITE
-*color7:      #e6e9ed
+*color7:      #c8c8c8
 *color15:     #f5f7fa
 
 ! RED
