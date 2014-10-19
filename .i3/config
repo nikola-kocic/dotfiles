@@ -205,7 +205,7 @@ bindsym $mod+minus scratchpad show
 
 bindsym $mod+Shift+Return exec xcwd | xargs urxvt -cd
 bindsym $mod+comma move workspace to output right
-bindsym $mod+x  exec xfce4-appfinder
+bindsym $mod+x [urgent=latest] focus
 bindsym Mod1+F2 exec xfce4-appfinder
 
 exec "[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources"
