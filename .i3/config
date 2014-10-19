@@ -192,6 +192,7 @@ for_window [instance="^xfce4-appfinder$"] floating enable
 for_window [instance="^xfce4-notifyd$"]   floating enable
 for_window [instance="^Gmount-iso$"] floating enable
 for_window [instance="^gnome-calculator$"] floating enable
+for_window [instance="^copyq$"] floating enable
 
 workspace_layout tabbed
 focus_follows_mouse no
@@ -210,10 +211,15 @@ bindsym Mod1+F2 exec xfce4-appfinder
 #exec --no-startup-id nm-applet
 #exec xfce4-clipman
 #exec gnome-settings-daemon
+exec copyq
 exec setxkbmap usrsl
 
 # shutdown menu
 bindsym $mod+Shift+e exec xfce4-session-logout
 # xfce settings
 bindsym $mod+Shift+s exec xfce4-settings-manager
+
+bindsym --release Print       exec --no-startup-id "scrot    ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0 && rm ~/screenshot.png"
+bindsym --release Mod1+Print  exec --no-startup-id "scrot -u ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0 && rm ~/screenshot.png"
+bindsym --release Shift+Print exec --no-startup-id "scrot -s ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0 && rm ~/screenshot.png"
 
