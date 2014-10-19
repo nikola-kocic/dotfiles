@@ -208,6 +208,7 @@ bindsym $mod+comma move workspace to output right
 bindsym $mod+x  exec xfce4-appfinder
 bindsym Mod1+F2 exec xfce4-appfinder
 
+exec "[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources"
 #exec --no-startup-id nm-applet
 #exec xfce4-clipman
 #exec gnome-settings-daemon
