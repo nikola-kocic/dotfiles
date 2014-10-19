@@ -6,8 +6,8 @@ zstyle -e ':completion:*' list-colors 'thingy=${PREFIX##*/} reply=( "=(#b)($thin
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
