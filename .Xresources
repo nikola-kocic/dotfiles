@@ -26,7 +26,14 @@ xscreensaver.passwd.thermometer.width:       8
 !datestamp format--see the strftime(3) manual page for details
 xscreensaver.dateFormat:    %I:%M%P %a %b %d, %Y
 
-URxvt.font: xft:Ubuntu Mono:pixelsize=16:style=regular:antialias=true:hinting=true
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+URxvt.font: xft:Monospace:pixelsize=12:style=regular:antialias=true:hinting=true
 URxvt*scrollstyle: plain
 URxvt*scrollBar_right: true
 URxvt*scrollTtyOutput: false
