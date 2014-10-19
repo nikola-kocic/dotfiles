@@ -25,24 +25,24 @@ setopt inc_append_history       # instantly append
 setopt hist_ignore_all_dups     # no duplicate
 
 # Don't use because of same handling of Ctrl+W and Alt+Backspace {{{
-#autoload -U select-word-style
-#select-word-style bash
+    #autoload -U select-word-style
+    #select-word-style bash
 # }}}
 
 # from https://github.com/andreafrancia/dot-files/blob/master/.zshrc
 # Bash-like Ctrl+W and Alt+Backspace{{{
 
-# Ctrl+W
-unix-word-rubout() {
-    local WORDCHARS='*?/_-.[]~=&;!#$%^(){}<>'
-    zle backward-kill-word
-}
-zle -N unix-word-rubout
-bindkey '^W' unix-word-rubout
+    # Ctrl+W
+    unix-word-rubout() {
+        local WORDCHARS='*?/_-.[]~=&;!#$%^(){}<>'
+        zle backward-kill-word
+    }
+    zle -N unix-word-rubout
+    bindkey '^W' unix-word-rubout
 
-# Alt+backspace
-WORDCHARS='*?[]~&;!$%^<>'
-bindkey '\e^h' backward-kill-word
+    # Alt+backspace
+    WORDCHARS='*?[]~&;!$%^<>'
+    bindkey '\e^h' backward-kill-word
 
 # }}}
 
