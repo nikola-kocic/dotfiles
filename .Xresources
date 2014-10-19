@@ -40,6 +40,7 @@ URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 URxvt*saveLines: 100000
+URxvt.urgentOnBell: True
 
 URxvt*internalBorder: 0
 URxvt.borderColor: #e6e9ed

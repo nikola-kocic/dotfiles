@@ -5,6 +5,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+
 HISTCONTROL=erasedups
 
 # append to the history file, don't overwrite it
@@ -105,6 +106,8 @@ stty -ixon  # Disable Ctrl+S freezing, use it for forward history search
 export HISTFILE=~/.bash_history
 HISTSIZE=10000
 HISTFILESIZE=20000
-PROMPT_COMMAND='history -a'
+
+PROMPT_COMMAND="${PROMPT_COMMAND}; history -a"
+PROMPT_COMMAND="${PROMPT_COMMAND}; echo -ne '\a'"
 
 source ~/.sh-common
