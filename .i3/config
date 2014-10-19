@@ -195,6 +195,7 @@ for_window [instance="^gnome-calculator$"] floating enable
 for_window [instance="^copyq$"] floating enable
 
 workspace_layout tabbed
+hide_edge_borders both
 focus_follows_mouse no
 
 # Make the currently focused window a scratchpad
