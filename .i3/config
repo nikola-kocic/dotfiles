@@ -218,7 +218,7 @@ exec "[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources"
 #exec xfce4-clipman
 #exec gnome-settings-daemon
 exec copyq
-exec volnoti
+exec volnoti -t 1
 exec setxkbmap usrsl
 exec --no-startup-id xsetroot -solid "#333333"
 
