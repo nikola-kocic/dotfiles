@@ -184,6 +184,7 @@ assign [class="Firefox"]     $w1
 assign [class="Geany"]       $w3
 assign [class="Gvim"]        $w3
 assign [class="Thunderbird"] $w4
+assign [class="RSSOwl"]      $w4
 assign [class="Liferea"]     $w4
 assign [class="Pidgin"]      $w4
 assign [class="Skype"]       $w4
