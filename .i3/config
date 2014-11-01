@@ -96,7 +96,7 @@ set $w4  4:comm
 set $w5  5:files
 set $w6  6
 set $w7  7
-set $w8  8:term-rem
+set $w8  8:term-remote
 set $w9  9:git
 set $w10 10:ide
 
