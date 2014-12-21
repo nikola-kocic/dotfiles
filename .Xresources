@@ -45,7 +45,7 @@ URxvt.urgentOnBell: True
 
 URxvt*internalBorder: 0
 URxvt.borderColor: #e6e9ed
-URxvt.background: #e6e9ed
+URxvt.background: #f5f7fa
 
 ! Configuration for https://github.com/muennich/urxvt-perls
 ! and https://github.com/richo/rxvt-unicode/blob/master/src/perl/confirm-paste
