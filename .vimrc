@@ -1,9 +1,22 @@
+syntax on
+"filetype plugin indent on
+
+" Send more characters for redraws
+set ttyfast
+
+" Enable mouse use in all modes
+set mouse=a
+
 " When pressing tab, insert 4 spaces
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
 set number
+
+" Make shift-insert work like in Xterm
+map <S-Insert> <MiddleMouse>
+map! <S-Insert> <MiddleMouse>
 
 " Highlight trailing whitespace in red
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -39,3 +52,6 @@ set statusline +=%1*%=%5l%*             "current line
 set statusline +=%1*/%L%*               "total lines
 set statusline +=%1*%4v\ %*             "virtual column number
 set statusline +=%1*0x%04B\ %*          "character under cursor
+
+
+au BufNewFile,BufRead *.rs set filetype=rust
