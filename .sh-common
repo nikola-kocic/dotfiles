@@ -13,18 +13,17 @@ PS1='[\u@\h \w]\$ '
 
 stty -ixon  # Disable Ctrl+S freezing, use it for forward history search
 
-HISTCONTROL=erasedups
 # append to the history file, don't overwrite it
 shopt -s histappend
-export HISTFILE=~/.bash_history
+HISTFILE=~/.bash_history
+HISTCONTROL=erasedups
 HISTSIZE=200000
 HISTFILESIZE=2000000
-#PROMPT_COMMAND="${PROMPT_COMMAND}; history -a"
-PROMPT_COMMAND="history -a"
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a"
 alias u="history -n"
 
 # Set urgent hint on promt
-PROMPT_COMMAND="${PROMPT_COMMAND}; echo -ne '\a'"
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }echo -ne '\a'"
 
 export GIT_EDITOR="vim"
 export EDITOR='vim'
