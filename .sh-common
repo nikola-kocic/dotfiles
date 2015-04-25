@@ -1,13 +1,49 @@
-export PYTHONDONTWRITEBYTECODE=1 # disable creation of pyc files
-export GREP_OPTIONS="--color"
-export GIT_EDITOR="vim"
-export VISUAL="vim"
-export EDITOR="vim"
+#
+# ~/.bashrc
+#
 
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias ll='ls --color=auto -la --full-time'
+
+
+PS1='[\u@\h \w]\$ '
+
+stty -ixon  # Disable Ctrl+S freezing, use it for forward history search
+
+HISTCONTROL=erasedups
+# append to the history file, don't overwrite it
+shopt -s histappend
+export HISTFILE=~/.bash_history
+HISTSIZE=200000
+HISTFILESIZE=2000000
+#PROMPT_COMMAND="${PROMPT_COMMAND}; history -a"
+PROMPT_COMMAND="history -a"
 alias u="history -n"
-alias rmpyc="find . -name '*.pyc' -delete"
-alias refreshgroups="exec su -l ${USER}"
+
+# Set urgent hint on promt
+PROMPT_COMMAND="${PROMPT_COMMAND}; echo -ne '\a'"
+
+export GIT_EDITOR="vim"
+export EDITOR='vim'
+export VISUAL='vim'
+export MAKEFLAGS=-j4
+export PYTHONDONTWRITEBYTECODE=1 # disable creation of pyc files
+export LESS="--RAW-CONTROL-CHARS --ignore-case --jump-target=4"
+export PATH="${HOME}/fs/bin:${PATH}"
+
+iploc () { curl -s http://ip-api.com/json/"$1"|tr , '\n'|sed 's/[\"{}]//g'; }
+
+alias grep="/usr/bin/grep --color=auto"
+alias gl='git log --pretty=oneline --graph --decorate --color'
 alias lsd='ls -lahrt --time-style=full-iso'
+alias rmpyc="find . -name '*.pyc' -delete"
+alias vcp="rsync -ah --progress"
+alias srlayout="setxkbmap -option grp:lalt_lshift_toggle -layout usrsl,rs -variant ,yz"
+alias tvim="gvim --servername `gvim --serverlist | head -1` --remote-tab"
+
 alias sync-project-server='git --git-dir /mnt/project/.git ls-files -z src/ | rsync -vz --exclude config.json --files-from=- --from0 /mnt/project/ project-server:~/project/'
 
 mount_tc() {
@@ -26,5 +62,3 @@ alias project='PROJECT_NAME="project" && \
         cd "${PROJECTPATH}/src" && \
         if [ ! -d "/run/${PROJECT_NAME}" ]; then sudo install -d -o "${USER}" -g "${USER}" -m750 "/run/${PROJECT_NAME}/"; fi'
 
-alias srlayout="setxkbmap -option grp:lalt_lshift_toggle -layout usrsl,rs -variant ,yz"
-alias tvim="gvim --servername `gvim --serverlist | head -1` --remote-tab"
