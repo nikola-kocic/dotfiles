@@ -251,8 +251,14 @@ bindsym $mod+Shift+s exec xfce4-settings-manager
 # bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -- -5% #decrease sound volume
 # bindsym XF86AudioMute        exec pactl set-sink-mute 0 toggle # mute sound
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/fs/bin/sound.sh up
+bindsym $mod+bracketright    exec --no-startup-id ~/fs/bin/sound.sh up
+bindsym $mod+shift+bracketright       exec --no-startup-id ~/fs/bin/mic.sh up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/fs/bin/sound.sh down
+bindsym $mod+bracketleft     exec --no-startup-id ~/fs/bin/sound.sh down
+bindsym $mod+shift+bracketleft     exec --no-startup-id ~/fs/bin/mic.sh down
 bindsym XF86AudioMute        exec --no-startup-id ~/fs/bin/sound.sh mute
+bindsym $mod+backslash       exec --no-startup-id ~/fs/bin/sound.sh mute
+bindsym $mod+shift+backslash     exec --no-startup-id ~/fs/bin/mic.sh mute
 bindsym --release Print       exec --no-startup-id "scrot    ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0"
 bindsym --release Mod1+Print  exec --no-startup-id "scrot -u ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0"
 bindsym --release Shift+Print exec --no-startup-id "scrot -s ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0"
