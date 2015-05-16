@@ -181,7 +181,7 @@ bar {
 #        status_command i3status
 #        status_command ~/fs/bin/i3-bw 1 /sys/class/net/enp5s0/statistics/rx_bytes /sys/class/net/enp5s0/statistics/tx_bytes
         status_command $HOME/fs/bin/conky-i3bar
-        tray_output primary
+        #tray_output primary
 }
 
 # Workspaces for first screen
@@ -215,6 +215,7 @@ for_window [instance="^xfce4-notifyd$"]   floating enable
 for_window [instance="^Gmount-iso$"] floating enable
 for_window [instance="^gnome-calculator$"] floating enable
 for_window [instance="^copyq$"] floating enable
+for_window [class="Blueman-manager"] floating enable
 
 workspace_layout tabbed
 hide_edge_borders both
@@ -223,8 +224,12 @@ focus_follows_mouse no
 
 bindsym $mod+Shift+Return exec xcwd | xargs urxvt -cd
 bindsym $mod+comma move workspace to output right
-bindsym $mod+x [urgent=latest] focus
+# bindsym $mod+x [urgent=latest] focus
+bindsym $mod+x workspace back_and_forth
 bindsym Mod1+F2 exec xfce4-appfinder
+bindsym $mod+o exec i3lock
+bindsym $mod+p exec lxdm -c USER_SWITCH
+bindsym $mod+z exec quickswitch.py
 
 exec "[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources"
 #exec --no-startup-id nm-applet
