@@ -184,18 +184,21 @@ bar {
         #tray_output primary
 }
 
-# Workspaces for first screen
-workspace $w1  output DVI-I-0
-workspace $w2  output DVI-I-0
-workspace $w3  output DVI-I-0
-workspace $w4  output DVI-I-0
-workspace $w5  output DVI-I-0
-# Workspaces for second screen
-workspace $w9  output DVI-I-1
-workspace $w6  output DVI-I-1
-workspace $w7  output DVI-I-1
-workspace $w8  output DVI-I-1
-workspace $w10 output DVI-I-1
+set $screen_left  DVI-I-0
+set $screen_right DVI-I-1
+
+# Workspaces for left screen
+workspace $w1  output $screen_left
+workspace $w2  output $screen_left
+workspace $w3  output $screen_left
+workspace $w4  output $screen_left
+workspace $w5  output $screen_left
+# Workspaces for right screen
+workspace $w6  output $screen_right
+workspace $w7  output $screen_right
+workspace $w8  output $screen_right
+workspace $w9  output $screen_right
+workspace $w10 output $screen_right
 
 assign [class="Firefox"]     $w1
 assign [class="Geany"]       $w3
