@@ -97,7 +97,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+c focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -223,6 +223,9 @@ for_window [class="Blueman-manager"] floating enable
 workspace_layout tabbed
 hide_edge_borders both
 focus_follows_mouse no
+
+# Focus last active container window when left clicking
+bindsym --release button1 focus child;focus child;focus child
 
 # The middle button over a titlebar kills the window
 bindsym --release button2 kill
