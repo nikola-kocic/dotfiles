@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import itertools
+import sys
+
+import i3
+
+def yield_parent(cid):
+    while True:
+        p = i3.parent(cid)
+        yield p
+        cid = p['id']
+
+def superfocus(direction):
+    cid = i3.filter(focused=True)[0]['id']
+
+    parents = list(itertools.takewhile(
+        lambda c: c['type'] != 'workspace', yield_parent(cid)
+    ))
+    if len(parents) > 1:
+        parents.pop()
+        p = parents[-1]
+        i3.focus(con_id=p['id'])
+
+    i3.focus(direction)
+    while i3.focus('child')[0]:
+        pass
+
+superfocus(sys.argv[1])
