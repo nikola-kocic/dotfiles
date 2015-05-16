@@ -248,7 +248,7 @@ bindsym $mod+Shift+s exec xfce4-settings-manager
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/bin/sound.sh up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/bin/sound.sh down
 bindsym XF86AudioMute        exec --no-startup-id ~/bin/sound.sh mute
-bindsym --release Print       exec --no-startup-id "scrot    ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0 && rm ~/screenshot.png"
-bindsym --release Mod1+Print  exec --no-startup-id "scrot -u ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0 && rm ~/screenshot.png"
-bindsym --release Shift+Print exec --no-startup-id "scrot -s ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0 && rm ~/screenshot.png"
+bindsym --release Print       exec --no-startup-id "scrot    ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0"
+bindsym --release Mod1+Print  exec --no-startup-id "scrot -u ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0"
+bindsym --release Shift+Print exec --no-startup-id "scrot -s ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0"
 
