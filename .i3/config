@@ -179,8 +179,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 #        status_command i3status
-#        status_command ~/bin/i3-bw 1 /sys/class/net/eth0/statistics/rx_bytes /sys/class/net/eth0/statistics/tx_bytes
-        status_command $HOME/bin/conky-i3bar
+#        status_command ~/fs/bin/i3-bw 1 /sys/class/net/enp5s0/statistics/rx_bytes /sys/class/net/enp5s0/statistics/tx_bytes
+        status_command $HOME/fs/bin/conky-i3bar
         tray_output primary
 }
 
@@ -245,9 +245,9 @@ bindsym $mod+Shift+s exec xfce4-settings-manager
 # bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
 # bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -- -5% #decrease sound volume
 # bindsym XF86AudioMute        exec pactl set-sink-mute 0 toggle # mute sound
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/bin/sound.sh up
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/bin/sound.sh down
-bindsym XF86AudioMute        exec --no-startup-id ~/bin/sound.sh mute
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/fs/bin/sound.sh up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/fs/bin/sound.sh down
+bindsym XF86AudioMute        exec --no-startup-id ~/fs/bin/sound.sh mute
 bindsym --release Print       exec --no-startup-id "scrot    ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0"
 bindsym --release Mod1+Print  exec --no-startup-id "scrot -u ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0"
 bindsym --release Shift+Print exec --no-startup-id "scrot -s ~/screenshot.png && copyq write image/png - < ~/screenshot.png  && copyq select 0"
