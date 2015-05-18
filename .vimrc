@@ -1,8 +1,14 @@
-syntax on
-"filetype plugin indent on
+if has("syntax")
+  syntax on
+endif
 
 " Send more characters for redraws
 set ttyfast
+
+" Fix for Synergy
+set nomousehide
+
+set showcmd
 
 " Enable mouse use in all modes
 set mouse=a
