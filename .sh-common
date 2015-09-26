@@ -4,11 +4,22 @@ HISTFILE=~/.bash_history
 HISTCONTROL=erasedups
 HISTSIZE=200000
 HISTFILESIZE=2000000
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a"
 alias u="history -n"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+${PROMPT_COMMAND};}history -a"
 
 # Set urgent hint on promt
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }echo -ne '\a'"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+${PROMPT_COMMAND};}echo -ne '\a'"
+
+# Show running process name in titlebar
+# https://gist.github.com/sgrankin/7882407
+trap 'echo -ne "\033]0;${BASH_COMMAND%% *}\007"' DEBUG
+function show_name {
+    if [[ -n "$BASH_COMMAND" ]]; then
+      echo -en "\033]0;"${PWD/#$HOME/\~}"\007"
+    fi
+}
+export PROMPT_COMMAND=${PROMPT_COMMAND:+${PROMPT_COMMAND%%;*( )};}'show_name'
+
 
 export GIT_EDITOR="vim"
 export EDITOR='vim'
