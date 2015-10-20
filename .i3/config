@@ -36,11 +36,13 @@ set $right l
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+show_marks yes
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -74,18 +76,18 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+v split h
+bindsym $mod+Shift+g split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+Shift+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+w layout tabbed
+bindsym $mod+Shift+d layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -94,10 +96,10 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus parent
 
 # focus the child container
-bindsym $mod+c focus child
+bindsym $mod+Shift+c focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -106,6 +108,7 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
+bindsym $mod+Shift+equal floating toggle; sticky toggle
 
 set $w1  1:www
 set $w2  2:term
@@ -143,9 +146,9 @@ bindsym $mod+Shift+9 move container to workspace $w9
 bindsym $mod+Shift+0 move container to workspace $w10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+n reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+m restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -173,7 +176,7 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+Shift+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -209,9 +212,31 @@ assign [class="Liferea"]     $w4
 assign [class="Pidgin"]      $w4
 assign [class="Skype"]       $w4
 assign [class="TeamSpeak 3"] $w4
+assign [class="^Doublecmd$"] $w5
 assign [class="git-gui"]     $w9
 assign [class="gitg"]        $w9
 assign [class="Eclipse"]     $w10
+
+
+bindsym $mod+e [class="^Thunderbird$"] focus
+bindsym $mod+r [class="^RSSOwl$"] focus
+bindsym $mod+s [class="^Skype$"] focus
+bindsym $mod+c [class="^Pidgin$"] focus
+bindsym $mod+f [class="^Doublecmd$"] focus
+
+bindsym $mod+Control+w mark web
+bindsym $mod+w exec ~/fs/bin/i3-focus-mark-or-class.sh web Firefox
+
+bindsym $mod+Control+a mark editor
+bindsym $mod+a exec ~/fs/bin/i3-focus-mark-or-class.sh editor Geany
+
+bindsym $mod+Control+q mark ide
+bindsym $mod+q [con_mark="ide"] focus
+
+bindsym $mod+Control+t mark temp
+bindsym $mod+t [con_mark="temp"] focus
+
+
 
 for_window [instance="^xfce4-appfinder$"] floating enable
 for_window [instance="^xfce4-notifyd$"]   floating enable
@@ -219,6 +244,10 @@ for_window [instance="^Gmount-iso$"] floating enable
 for_window [instance="^gnome-calculator$"] floating enable
 for_window [instance="^copyq$"] floating enable
 for_window [class="Blueman-manager"] floating enable
+
+for_window [title =" - Skype™$"] mark skype
+for_window [title=" - Skype™ Chat$"] move window to mark skype
+
 
 workspace_layout tabbed
 hide_edge_borders both
@@ -234,19 +263,17 @@ bindsym button2 nop
 # change focused container
 bindsym $mod+Tab exec ~/fs/bin/superfocus right
 bindsym $mod+Shift+Tab exec ~/fs/bin/superfocus left
+bindsym Mod1+Tab exec quickswitch.py
 
 bindsym $mod+Shift+Return exec xcwd | xargs urxvt -cd
 bindsym $mod+comma move workspace to output right
 # bindsym $mod+x [urgent=latest] focus
 bindsym $mod+x workspace back_and_forth
 bindsym Mod1+F2 exec xfce4-appfinder
-bindsym $mod+o exec i3lock
-bindsym $mod+p exec lxdm -c USER_SWITCH
-bindsym $mod+z exec quickswitch.py
+bindsym $mod+Shift+o exec i3lock
+bindsym $mod+Shift+p exec lxdm -c USER_SWITCH
 
 exec "[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources"
-#exec --no-startup-id nm-applet
-#exec xfce4-clipman
 #exec gnome-settings-daemon
 exec copyq
 exec volnoti -t 1
@@ -257,7 +284,7 @@ exec --no-startup-id xsetroot -solid "#333333"
 # shutdown menu
 #bindsym $mod+Shift+e exec xfce4-session-logout
 # xfce settings
-bindsym $mod+Shift+s exec xfce4-settings-manager
+#bindsym $mod+Shift+s exec xfce4-settings-manager
 
 # Pulse Audio controls
 # bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
