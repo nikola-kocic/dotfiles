@@ -43,7 +43,7 @@ export LESS_TERMCAP_us=$(printf '\e[1;32m')
 export LESS_TERMCAP_so=$(printf '\e[1;44;1m')
 
 iploc () { curl -s http://ip-api.com/json/"$1"|tr , '\n'|sed 's/[\"{}]//g'; }
-installhistory() { expac --timefmt='%Y-%m-%d %T' '%l\t%n' | sort }
+installhistory() { expac --timefmt='%Y-%m-%d %T' '%l\t%n' | sort; }
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
