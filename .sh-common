@@ -68,7 +68,9 @@ alias srlayout="setxkbmap -option grp:lalt_lshift_toggle -layout usrsl,rs -varia
 alias tvim="gvim --servername `gvim --serverlist | head -1` --remote-tab"
 alias pull-subfolders-git="find . -maxdepth 1 -type d ! -path . -exec sh -c '(cd {} && git pull)' ';'"
 alias sync-project-server='git --git-dir /mnt/project/.git ls-files -z src/ | rsync -vz --exclude config.json --files-from=- --from0 /mnt/project/ project-server:~/project/'
-alias eclipse="(SWT_GTK3=0 ~/bin/eclipse/eclipse &)"
+alias eclipse="(SWT_GTK3=0 ~/fs/bin/eclipse/eclipse &)"
+alias lsvfiogroups="find /sys/kernel/iommu_groups/ -type l"
+alias checkreboot="sudo lsof | grep 'DEL.*lib'"
 
 mount_tc() {
     local FILEPATH="${1}"
