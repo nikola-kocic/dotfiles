@@ -266,7 +266,7 @@ bindsym $mod+Tab exec ~/fs/bin/superfocus right
 bindsym $mod+Shift+Tab exec ~/fs/bin/superfocus left
 bindsym Mod1+Tab exec quickswitch.py
 
-bindsym $mod+Shift+Return exec xcwd | xargs urxvt -cd
+bindsym $mod+Shift+Return exec urxvt -cd "`xcwd`"
 bindsym $mod+comma move workspace to output right
 bindsym $mod+z [urgent=latest] focus
 bindsym $mod+x workspace back_and_forth
