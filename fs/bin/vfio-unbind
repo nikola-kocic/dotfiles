@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+PCI_DEVICE="${1}"
+NEW_DRIVER="vfio-pci"
+
+BASE_PATH="/sys/bus/pci/devices/0000:${PCI_DEVICE}"
+	if [ -d "${BASE_PATH}/driver" ]; then
+	driver=$(readlink "${BASE_PATH}/driver/module")
+	if [ $driver ]; then
+		driver=$(basename $driver)
+		if [ "${driver}" = "${NEW_DRIVER}" ]; then
+			echo "${PCI_DEVICE} is already bound to ${NEW_DRIVER}"
+			exit
+		fi
+	fi
+fi
+VENDOR_ID=$(cat "${BASE_PATH}/vendor")
+DEVICE_ID=$(cat "${BASE_PATH}/device")
+
+
+echo "${VENDOR_ID} ${DEVICE_ID}" > "/sys/bus/pci/drivers/${NEW_DRIVER}/new_id"
+echo "0000:${PCI_DEVICE}" > "/sys/bus/pci/devices/0000:${PCI_DEVICE}/driver/unbind"
+echo "0000:${PCI_DEVICE}" > "/sys/bus/pci/drivers/${NEW_DRIVER}/bind"
+echo "${VENDOR_ID} ${DEVICE_ID}" > "/sys/bus/pci/drivers/${NEW_DRIVER}/remove_id"

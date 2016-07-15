@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+PCI_DEVICE="${1}"
+RESCAN="${2}"
+
+
+BASE_PATH="/sys/bus/pci/devices/0000:${PCI_DEVICE}"
+echo > "${BASE_PATH}/driver_override"
+echo 1 > "${BASE_PATH}/remove"
+if [ "${RESCAN}" = "true" ]
+then
+    echo 1 > /sys/bus/pci/rescan
+fi
