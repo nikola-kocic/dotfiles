@@ -31,15 +31,15 @@ function turn_off_laptop_display()
     args+=(--output eDP1 --off)
 }
 
-DOCK_MONITOR_STATUS=$(cat /sys/class/drm/card0-DP-1/status)  # connected or disconnected
-echo "DOCK_MONITOR_STATUS=${DOCK_MONITOR_STATUS}"
+#DOCK_MONITOR_STATUS=$(cat /sys/class/drm/card0-DP-1/status)  # connected or disconnected
+DP1_CONNECTED_STRING=$(xrandr | grep  "^DP1 connected")
 
-if [ "${DOCK_MONITOR_STATUS}" == "connected" ] ; then
-  turn_on_docked_displays
-elif [ "${DOCK_MONITOR_STATUS}" == "disconnected" ] ; then
+echo "DP1_CONNECTED_STRING=${DP1_CONNECTED_STRING}"
+
+if [[ -z $DP1_CONNECTED_STRING ]] ; then
   turn_off_docked_displays
 else
-  exit
+  turn_on_docked_displays
 fi
 
 LID_STATUS=$(cat /proc/acpi/button/lid/LID0/state | cut -d' ' -f2- | sed 's/^ *//')  # open or closed
