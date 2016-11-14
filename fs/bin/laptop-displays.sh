@@ -32,7 +32,7 @@ function turn_off_laptop_display()
 }
 
 #DOCK_MONITOR_STATUS=$(cat /sys/class/drm/card0-DP-1/status)  # connected or disconnected
-DP1_CONNECTED_STRING=$(xrandr | grep  "^DP1 connected")
+DP1_CONNECTED_STRING=$(xrandr | grep  "^DP1 connected") || $(echo "")  # empty or not empty
 
 echo "DP1_CONNECTED_STRING=${DP1_CONNECTED_STRING}"
 
