@@ -255,11 +255,11 @@ hide_edge_borders both
 focus_follows_mouse no
 
 # Focus last active container window when left clicking
-bindsym --release button1 focus child;focus child;focus child
+bindsym --release Mod2+button1 focus child;focus child;focus child
 
 # The middle button over a titlebar kills the window
-bindsym --release button2 kill
-bindsym button2 nop
+bindsym --release Mod2+button2 kill
+bindsym Mod2+button2 nop
 
 # change focused container
 bindsym $mod+Tab exec ~/fs/bin/i3-switch-tabs right
