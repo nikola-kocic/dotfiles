@@ -262,9 +262,9 @@ bindsym --release button2 kill
 bindsym button2 nop
 
 # change focused container
-bindsym $mod+Tab exec ~/fs/bin/superfocus right
-bindsym $mod+Shift+Tab exec ~/fs/bin/superfocus left
-bindsym Mod1+Tab exec quickswitch.py
+bindsym $mod+Tab exec ~/fs/bin/i3-switch-tabs right
+bindsym $mod+Shift+Tab exec ~/fs/bin/i3-switch-tabs left
+bindsym $mod+Ctrl+Tab exec quickswitch
 
 bindsym $mod+Shift+Return exec urxvt -cd "`xcwd`"
 bindsym $mod+comma move workspace to output right
@@ -291,9 +291,20 @@ bindsym $mod+shift+bracketleft   exec --no-startup-id ~/fs/bin/mic.sh down
 bindsym $mod+shift+backslash     exec --no-startup-id ~/fs/bin/mic.sh mute
 bindsym XF86AudioRaiseVolume     exec --no-startup-id ~/fs/bin/sound.sh up
 bindsym $mod+bracketright        exec --no-startup-id ~/fs/bin/sound.sh up
+bindsym $mod+Control+bracketright  exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="5"
 bindsym XF86AudioLowerVolume     exec --no-startup-id ~/fs/bin/sound.sh down
 bindsym $mod+bracketleft         exec --no-startup-id ~/fs/bin/sound.sh down
+bindsym $mod+Control+bracketleft  exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="-5"
 bindsym XF86AudioMute            exec --no-startup-id ~/fs/bin/sound.sh mute
 bindsym $mod+backslash           exec --no-startup-id ~/fs/bin/sound.sh mute
+bindsym $mod+Control+backslash   exec --no-startup-id ~/fs/bin/change-volume-of-active --mute
 bindsym Print                    exec --no-startup-id ~/fs/bin/screenshot.sh
 bindsym Shift+Print              exec --no-startup-id ~/fs/bin/screenshot.sh -u
+bindsym $mod+Control+Home        exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c PlayPause
+bindsym $mod+Control+End         exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Pause
+bindsym $mod+Control+Next        exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Next
+bindsym $mod+Control+Prior       exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Previous
+bindsym $mod+Control+Right       exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Seek -a="5000000"
+bindsym $mod+Control+Left        exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Seek -a="-5000000"
+bindsym $mod+Control+Down        exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c OffsetVolume -a="-0.025"
+bindsym $mod+Control+Up          exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c OffsetVolume -a="0.025"
