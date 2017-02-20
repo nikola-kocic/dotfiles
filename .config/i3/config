@@ -245,14 +245,18 @@ for_window [instance="^Gmount-iso$"] floating enable
 for_window [instance="^gnome-calculator$"] floating enable
 for_window [instance="^copyq$"] floating enable
 for_window [class="Blueman-manager"] floating enable
+for_window [class="retroarch"] floating enable
+for_window [class="volnoti"] floating enable
 
 for_window [title =" - Skype™$"] mark skype
 for_window [title=" - Skype™ Chat$"] move window to mark skype
+for_window [class="streamlink-twitch-gui"] border normal 0
 
 
 workspace_layout tabbed
 hide_edge_borders both
 focus_follows_mouse no
+mouse_warping none
 
 # Focus last active container window when left clicking
 bindsym --release Mod2+button1 focus child;focus child;focus child
@@ -271,13 +275,14 @@ bindsym $mod+comma move workspace to output right
 bindsym $mod+z [urgent=latest] focus
 bindsym $mod+x workspace back_and_forth
 bindsym Mod1+F2 exec xfce4-appfinder
-bindsym $mod+Shift+o exec i3lock
+bindsym $mod+Shift+o exec i3lock -d -c 002020
 bindsym $mod+Shift+p exec lxdm -c USER_SWITCH
 
 exec "[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources"
 # lxsession is needed for lxpolkit
 exec --no-startup-id /usr/bin/lxsession
 #exec gnome-settings-daemon
+exec nm-applet
 exec copyq
 exec volnoti -t 1
 exec setxkbmap usrsl
