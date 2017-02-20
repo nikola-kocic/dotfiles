@@ -27,6 +27,7 @@ export VISUAL='vim'
 export MAKEFLAGS=-j5
 export PYTHONDONTWRITEBYTECODE=1 # disable creation of pyc files
 export PATH="${HOME}/fs/bin:${PATH}"
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 # Don't show error "Couldn't connect to accessibility bus: Failed to connect to socket..."
 export NO_AT_BRIDGE=1
 
