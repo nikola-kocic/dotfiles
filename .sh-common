@@ -28,6 +28,7 @@ export MAKEFLAGS=-j5
 export PYTHONDONTWRITEBYTECODE=1 # disable creation of pyc files
 export PATH="${HOME}/fs/bin:${PATH}"
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+export QT_QPA_PLATFORMTHEME="qt5ct"
 # Don't show error "Couldn't connect to accessibility bus: Failed to connect to socket..."
 export NO_AT_BRIDGE=1
 
@@ -58,20 +59,24 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias ll='ls --color=auto -la --full-time'
-alias startx2="startx -- vt1 -keeptty &> $HOME/.xorg.log 2>&1"
-alias ssh='TERM=rxvt-unicode ssh'
+alias ll='/usr/bin/ls --color=auto -la --full-time'
 alias gl='git log --pretty=oneline --graph --decorate --color'
 alias lsd='ls -lahrt --time-style=full-iso'
 alias rmpyc="find . -name '*.pyc' -delete"
 alias vcp="rsync -ah --progress"
 alias srlayout="setxkbmap -option grp:lalt_lshift_toggle -layout usrsl,rs -variant ,yz"
 alias tvim="gvim --servername `gvim --serverlist | head -1` --remote-tab"
+alias startx2="startx -- vt1 -keeptty &> $HOME/.xorg.log 2>&1"
+alias ssh='TERM=rxvt-unicode ssh'
 alias pull-subfolders-git="find . -maxdepth 1 -type d ! -path . -exec sh -c '(cd {} && git pull)' ';'"
 alias sync-project-server='git --git-dir /mnt/project/.git ls-files -z src/ | rsync -vz --exclude config.json --files-from=- --from0 /mnt/project/ project-server:~/project/'
 alias eclipse="(SWT_GTK3=0 ~/fs/bin/eclipse/eclipse &)"
 alias lsvfiogroups="find /sys/kernel/iommu_groups/ -type l"
+alias removeorphans='sudo pacman -Rns $(pacman -Qtdq)'
 alias checkreboot="sudo lsof | grep 'DEL.*lib'"
+checkrestart() { lsof +c 0 | grep 'DEL.*lib'; }
+checkrestart2() { lsof +c 0 | grep 'DEL.*lib' | awk '1 { print $1 ": " $NF }' | sort -u; }
+
 
 mount_tc() {
     local FILEPATH="${1}"
