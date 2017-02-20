@@ -275,6 +275,8 @@ bindsym $mod+Shift+o exec i3lock
 bindsym $mod+Shift+p exec lxdm -c USER_SWITCH
 
 exec "[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources"
+# lxsession is needed for lxpolkit
+exec --no-startup-id /usr/bin/lxsession
 #exec gnome-settings-daemon
 exec copyq
 exec volnoti -t 1
