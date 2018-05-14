@@ -45,6 +45,18 @@ export LESS_TERMCAP_us=$(printf '\e[1;32m')
 export LESS_TERMCAP_so=$(printf '\e[1;44;1m')
 
 iploc () { curl -s http://ip-api.com/json/"$1"|tr , '\n'|sed 's/[\"{}]//g'; }
+iplocshort () { curl -s http://ip-api.com/json/"$1" | python -c 'import json,sys;s=sys.stdin.read();obj=json.loads(s);print(obj.get("country", "???") + " - " + obj.get("city", "???"))'; }
+
+traceloc() {
+    while read -r line; do
+        ip=$(echo "$line" | awk '{print $2}' | grep -E "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
+        if [ -n "$ip" ]; then
+            printf '%-16s: ' $ip
+            iplocshort "$ip"
+        fi
+    done < <(stdbuf -o0 tracepath -n $1)
+}
+
 installhistory() { expac --timefmt='%Y-%m-%d %T' '%l\t%n' | sort; }
 
 # enable color support of ls and also add handy aliases
