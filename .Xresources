@@ -34,7 +34,7 @@ Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
-URxvt.font: xft:Monospace:pixelsize=12:style=regular:antialias=true:hinting=true
+URxvt.font: xft:Monospace:pixelsize=12:style=regular:antialias=true:hinting=true,xft:Symbola,xft:Noto Emoji
 URxvt*scrollstyle: plain
 URxvt*scrollBar_right: true
 URxvt*scrollTtyOutput: false
