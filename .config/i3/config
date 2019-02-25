@@ -24,22 +24,23 @@ font pango:DejaVu Sans Mono 8
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, its unicode glyph coverage is limited, the old
 # X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+# font, it doesn't scale on retina/hidpi displays.
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
-set $left h
-set $down j
-set $up k
-set $right l
+set $up l
+set $down k
+set $left j
+set $right semicolon
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-show_marks yes
-
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec kitty
+bindsym $mod+Return exec urxvt
+#bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -77,18 +78,18 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+g split h
+bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+Shift+v split v
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+Shift+f fullscreen toggle
+bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+Shift+s layout stacking
-bindsym $mod+Shift+w layout tabbed
-bindsym $mod+Shift+d layout toggle split
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -97,10 +98,10 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+Shift+a focus parent
+bindsym $mod+a focus parent
 
 # focus the child container
-bindsym $mod+Shift+c focus child
+bindsym $mod+c focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -111,47 +112,49 @@ bindsym $mod+minus scratchpad show
 
 bindsym $mod+Shift+equal floating toggle; sticky toggle
 
-set $w1  1:www
-set $w2  2:term
-set $w3  3:editor
-set $w4  4:comm
-set $w5  5:files
-set $w6  6
-set $w7  7
-set $w8  8:term-remote
-set $w9  9:git
-set $w10 10:ide
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1:www"
+set $ws2 "2:term"
+set $ws3 "3:editor"
+set $ws4 "4:comm"
+set $ws5 "5:files"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8:term-remote"
+set $ws9 "9:git"
+set $ws10 "10:ide"
 
 # switch to workspace
-bindsym $mod+1 workspace $w1
-bindsym $mod+2 workspace $w2
-bindsym $mod+3 workspace $w3
-bindsym $mod+4 workspace $w4
-bindsym $mod+5 workspace $w5
-bindsym $mod+6 workspace $w6
-bindsym $mod+7 workspace $w7
-bindsym $mod+8 workspace $w8
-bindsym $mod+9 workspace $w9
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $w10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $w1
-bindsym $mod+Shift+2 move container to workspace $w2
-bindsym $mod+Shift+3 move container to workspace $w3
-bindsym $mod+Shift+4 move container to workspace $w4
-bindsym $mod+Shift+5 move container to workspace $w5
-bindsym $mod+Shift+6 move container to workspace $w6
-bindsym $mod+Shift+7 move container to workspace $w7
-bindsym $mod+Shift+8 move container to workspace $w8
-bindsym $mod+Shift+9 move container to workspace $w9
-bindsym $mod+Shift+0 move container to workspace $w10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+n reload
+bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+m restart
+bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -172,12 +175,23 @@ mode "resize" {
         bindsym Up          resize shrink height 10 px or 10 ppt
         bindsym Right       resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
+        # back to normal: Enter or Escape or Mod1+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym Mod1+r mode "default"
 }
 
-bindsym $mod+Shift+r mode "resize"
+bindsym $mod+r mode "resize"
+
+# Radeon
+set $screen_left  HDMI-A-0
+set $screen_right DisplayPort-0
+#set $screen_left  DVI-D-0
+#set $screen_right DVI-D-0
+
+## Intel
+#set $screen_left  HDMI1
+#set $screen_right HDMI2
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -185,62 +199,24 @@ bar {
 #        status_command i3status
 #        status_command ~/fs/bin/i3-bw 1 /sys/class/net/enp5s0/statistics/rx_bytes /sys/class/net/enp5s0/statistics/tx_bytes
         status_command $HOME/fs/bin/conky-i3bar
-        #tray_output primary
+        tray_output $screen_left
 }
 
-set $screen_left  DVI-I-0
-set $screen_right DVI-I-1
-
 # Workspaces for left screen
-workspace $w1  output $screen_left
-workspace $w2  output $screen_left
-workspace $w3  output $screen_left
-workspace $w4  output $screen_left
-workspace $w5  output $screen_left
+workspace $ws1  output $screen_left
+workspace $ws2  output $screen_left
+workspace $ws3  output $screen_left
+workspace $ws4  output $screen_left
+workspace $ws5  output $screen_left
 # Workspaces for right screen
-workspace $w6  output $screen_right
-workspace $w7  output $screen_right
-workspace $w8  output $screen_right
-workspace $w9  output $screen_right
-workspace $w10 output $screen_right
-
-assign [class="Firefox"]     $w1
-assign [class="Geany"]       $w3
-assign [class="Gvim"]        $w3
-assign [class="Thunderbird"] $w4
-assign [class="RSSOwl"]      $w4
-assign [class="Liferea"]     $w4
-assign [class="Pidgin"]      $w4
-assign [class="Skype"]       $w4
-assign [class="TeamSpeak 3"] $w4
-assign [class="^Doublecmd$"] $w5
-assign [class="git-gui"]     $w9
-assign [class="gitg"]        $w9
-assign [class="Eclipse"]     $w10
-
-
-bindsym $mod+e [class="^Thunderbird$"] focus
-bindsym $mod+r [class="^RSSOwl$"] focus
-bindsym $mod+s [class="^Skype$"] focus
-bindsym $mod+c [class="^Pidgin$"] focus
-bindsym $mod+f [class="^Doublecmd$"] focus
-
-bindsym $mod+Control+w mark web
-bindsym $mod+w exec ~/fs/bin/i3-focus-mark-or-class.sh web Firefox
-
-bindsym $mod+Control+a mark editor
-bindsym $mod+a exec ~/fs/bin/i3-focus-mark-or-class.sh editor Geany
-
-bindsym $mod+Control+q mark ide
-bindsym $mod+q [con_mark="ide"] focus
-
-bindsym $mod+Control+t mark temp
-bindsym $mod+t [con_mark="temp"] focus
-
-
+workspace $ws6  output $screen_right
+workspace $ws7  output $screen_right
+workspace $ws8  output $screen_right
+workspace $ws9  output $screen_right
+workspace $ws10 output $screen_right
 
 for_window [instance="^xfce4-appfinder$"] floating enable
-for_window [instance="^xfce4-notifyd$"]   floating enable
+#for_window [instance="^xfce4-notifyd$"]   floating enable
 for_window [instance="^Gmount-iso$"] floating enable
 for_window [instance="^gnome-calculator$"] floating enable
 for_window [instance="^copyq$"] floating enable
@@ -257,21 +233,24 @@ workspace_layout tabbed
 hide_edge_borders both
 focus_follows_mouse no
 mouse_warping none
+show_marks yes
 
 # Focus last active container window when left clicking
-bindsym --release Mod2+button1 focus child;focus child;focus child
+bindsym --release button1 focus child;focus child;focus child
 
 # The middle button over a titlebar kills the window
-bindsym --release Mod2+button2 kill
-bindsym Mod2+button2 nop
+bindsym --release button2 kill
+bindsym button2 nop
 
 # change focused container
+force_focus_wrapping yes
 bindsym $mod+Tab exec ~/fs/bin/i3-switch-tabs right
 bindsym $mod+Shift+Tab exec ~/fs/bin/i3-switch-tabs left
 bindsym $mod+Ctrl+Tab exec quickswitch
 
 bindsym $mod+Shift+Return exec urxvt -cd "`xcwd`"
-bindsym $mod+comma move workspace to output right
+bindsym $mod+comma move workspace to output left
+bindsym $mod+period move workspace to output right
 bindsym $mod+z [urgent=latest] focus
 bindsym $mod+x workspace back_and_forth
 bindsym Mod1+F2 exec xfce4-appfinder
@@ -285,8 +264,10 @@ exec --no-startup-id /usr/bin/lxsession
 exec nm-applet
 exec copyq
 exec volnoti -t 1
-exec setxkbmap usrsl
-exec --no-startup-id xsetroot -solid "#333333"
+#exec setxkbmap usrsl
+# replaced by $ sudo localectl --no-convert set-x11-keymap usrsl,rs grp:alt_space_toggle
+exec setxkbmap -layout usrsl,rs -option grp:alt_space_toggle
+exec --no-startup-id hsetroot -solid "#000"
 
 
 # shutdown menu
@@ -298,15 +279,16 @@ bindsym $mod+shift+bracketleft   exec --no-startup-id ~/fs/bin/mic.sh down
 bindsym $mod+shift+backslash     exec --no-startup-id ~/fs/bin/mic.sh mute
 bindsym XF86AudioRaiseVolume     exec --no-startup-id ~/fs/bin/sound.sh up
 bindsym $mod+bracketright        exec --no-startup-id ~/fs/bin/sound.sh up
-bindsym $mod+Control+bracketright  exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="5"
+bindsym $mod+Control+bracketright  exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="5" -c
 bindsym XF86AudioLowerVolume     exec --no-startup-id ~/fs/bin/sound.sh down
 bindsym $mod+bracketleft         exec --no-startup-id ~/fs/bin/sound.sh down
-bindsym $mod+Control+bracketleft  exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="-5"
+bindsym $mod+Control+bracketleft  exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="-5" -c
 bindsym XF86AudioMute            exec --no-startup-id ~/fs/bin/sound.sh mute
 bindsym $mod+backslash           exec --no-startup-id ~/fs/bin/sound.sh mute
-bindsym $mod+Control+backslash   exec --no-startup-id ~/fs/bin/change-volume-of-active --mute
+bindsym $mod+Control+backslash   exec --no-startup-id ~/fs/bin/change-volume-of-active --mute -c
 bindsym Print                    exec --no-startup-id ~/fs/bin/screenshot.sh
 bindsym Shift+Print              exec --no-startup-id ~/fs/bin/screenshot.sh -u
+#bindsym Mod1+Print              exec --no-startup-id ~/fs/bin/screenshot.sh -s
 bindsym $mod+Control+Home        exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c PlayPause
 bindsym $mod+Control+End         exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Pause
 bindsym $mod+Control+Next        exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Next
