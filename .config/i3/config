@@ -227,6 +227,7 @@ for_window [class="volnoti"] floating enable
 for_window [title =" - Skype™$"] mark skype
 for_window [title=" - Skype™ Chat$"] move window to mark skype
 for_window [class="streamlink-twitch-gui"] border normal 0
+for_window [title="Slack Call Minipanel"] move absolute position 1626 px 998 px
 
 
 workspace_layout tabbed
