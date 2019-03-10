@@ -1,7 +1,7 @@
 # append to the history file, don't overwrite it
 shopt -s histappend
 HISTFILE=~/.bash_history
-HISTCONTROL=erasedups
+HISTCONTROL=ignoredups:erasedups
 HISTSIZE=200000
 HISTFILESIZE=2000000
 alias u="history -n"
@@ -29,6 +29,7 @@ export PYTHONDONTWRITEBYTECODE=1 # disable creation of pyc files
 export PATH="${HOME}/fs/bin:${PATH}"
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export CONAN_COLOR_DARK=1
 # Don't show error "Couldn't connect to accessibility bus: Failed to connect to socket..."
 export NO_AT_BRIDGE=1
 
@@ -85,6 +86,7 @@ alias sync-project-server='git --git-dir /mnt/project/.git ls-files -z src/ | rs
 alias eclipse="(SWT_GTK3=0 ~/fs/bin/eclipse/eclipse &)"
 alias lsvfiogroups="find /sys/kernel/iommu_groups/ -type l"
 alias removeorphans='sudo pacman -Rns $(pacman -Qtdq)'
+alias checkpackages='sudo pacman -Qkk 1> /dev/null'
 alias checkreboot="sudo lsof | grep 'DEL.*lib'"
 checkrestart() { lsof +c 0 | grep 'DEL.*lib'; }
 checkrestart2() { lsof +c 0 | grep 'DEL.*lib' | awk '1 { print $1 ": " $NF }' | sort -u; }
