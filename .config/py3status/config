@@ -1,0 +1,105 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 1
+}
+
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "net_rate"
+#order += "battery all"
+order += "battery_level"
+order += "volume_status out"
+order += "volume_status in"
+#order += "volume out"
+#order += "volume in"
+order += "diskdata"
+order += "sysdata"
+order += "disk /home"
+order += "tztime local"
+
+wireless _first_ {
+        format_up = "W: (%quality at %essid) %ip"
+        format_down = "W: down"
+}
+
+ethernet _first_ {
+        # if you use %speed, i3status requires root privileges
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+battery all {
+        format = "%status %percentage %remaining"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
+
+load {
+        format = "%1min"
+}
+
+disk "/home" {
+        format = "Home %avail free"
+}
+
+volume out {
+#	device = "pulse:alsa_output.pci-0000_00_1b.0.analog-stereo"
+	format = "🔊 %volume"
+	format_muted = "🔈 ---"
+        mixer = "Master"
+}
+
+volume in {
+	format = "🎤 %volume"
+	format_muted = "🎤 ---"
+        mixer = "Capture"
+}
+
+volume_status out {
+	cache_timeout = 5
+	device = "alsa_output.pci-0000_00_1b.0.analog-stereo"
+	format = "🔊 [\?min_length=3 {percentage}]"
+	format_muted = "🔈 ---"
+	command = "pamixer"
+}
+
+volume_status in {
+	cache_timeout = 5
+	is_input = 1
+	device = "alsa_input.pci-0000_00_1b.0.analog-stereo"
+	format = "🎤 [\?min_length=3 {percentage}]"
+	format_muted = "🎤 ---"
+	command = "pamixer"
+}
+
+net_rate {
+	format = "{interface}:{down}▼{up}▲"
+	format_value = "[\?min_length=6 {value:.0f}{unit}]"
+	unit = "K"
+}
+
+sysdata {
+	cache_timeout = 1
+	format = "[\?color=cpu_used_percent CPU [\?min_length=3 {cpu_used_percent:.0f}]%]\,[\?color=cpu_temp [\?min_length=3 {cpu_temp:.0f}]°C]\| [\?color=mem_used_percent RAM [\?min_length=3 {mem_used_percent:.0f}]%]"
+	thresholds = [(0, "#fff"), (60, "degraded"), (80, "bad")]
+}
+
+diskdata {
+	cache_timeout = 1
+	format = "R {read} \| W {write}"
+}
+
+battery_level {
+	format = "{icon} {percent}"
+	notify_low_level = True
+}
