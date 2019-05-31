@@ -11,6 +11,7 @@ general {
         interval = 1
 }
 
+order += "keyboard_locks"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "net_rate"
@@ -24,6 +25,11 @@ order += "diskdata"
 order += "sysdata"
 order += "disk /home"
 order += "tztime local"
+
+
+keyboard_locks {
+    format = '[\?if=caps_lock&color=bad CAPS|\?color=#fff CAPS] '
+}
 
 wireless _first_ {
         format_up = "W: (%quality at %essid) %ip"
@@ -41,7 +47,7 @@ battery all {
 }
 
 tztime local {
-        format = "%Y-%m-%d %H:%M:%S"
+        format = "%a %Y-%m-%d %H:%M:%S"
 }
 
 load {
@@ -49,7 +55,7 @@ load {
 }
 
 disk "/home" {
-        format = "Home %avail free"
+        format = "~ free %avail"
 }
 
 volume out {
