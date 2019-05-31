@@ -183,11 +183,16 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Radeon
-set $screen_left  HDMI-A-0
-set $screen_right DisplayPort-0
-#set $screen_left  DVI-D-0
-#set $screen_right DVI-D-0
+# T440s
+set $screen_left  eDP1
+set $screen_right eDP1
+
+
+## Radeon
+#set $screen_left  HDMI-A-0
+#set $screen_right DisplayPort-0
+##set $screen_left  DVI-D-0
+##set $screen_right DVI-D-0
 
 ## Intel
 #set $screen_left  HDMI1
@@ -198,7 +203,9 @@ set $screen_right DisplayPort-0
 bar {
 #        status_command i3status
 #        status_command ~/fs/bin/i3-bw 1 /sys/class/net/enp5s0/statistics/rx_bytes /sys/class/net/enp5s0/statistics/tx_bytes
-        status_command $HOME/fs/bin/conky-i3bar
+#        status_command $HOME/fs/bin/conky-i3bar
+        status_command py3status
+#        status_command i3blocks
         tray_output $screen_left
 }
 
@@ -255,21 +262,26 @@ bindsym $mod+period move workspace to output right
 bindsym $mod+z [urgent=latest] focus
 bindsym $mod+x workspace back_and_forth
 bindsym Mod1+F2 exec xfce4-appfinder
-bindsym $mod+Shift+o exec i3lock -d -c 002020
+bindsym $mod+Shift+o exec i3lock --show-failed-attempts --color=002020
 bindsym $mod+Shift+p exec lxdm -c USER_SWITCH
 
 exec "[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources"
-# lxsession is needed for lxpolkit
-exec --no-startup-id /usr/bin/lxsession
-#exec gnome-settings-daemon
+
+# Gnome Session
+#exec --no-startup-id /usr/lib/gsd-xsettings
+#exec --no-startup-id gnome-flashback
+
 exec nm-applet
 exec copyq
-exec volnoti -t 1
+exec volnoti --timeout 1
 #exec setxkbmap usrsl
 # replaced by $ sudo localectl --no-convert set-x11-keymap usrsl,rs grp:alt_space_toggle
-exec setxkbmap -layout usrsl,rs -option grp:alt_space_toggle
+#exec setxkbmap -layout usrsl,rs -option grp:alt_space_toggle
+#exec setxkbmap -option altwin:swap_alt_win
 exec --no-startup-id hsetroot -solid "#000"
 
+exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" 290 1' # Natural scroll
+exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" 298 {0 1}' # Click Methods "buttonareas", "clickfinger"
 
 # shutdown menu
 #bindsym $mod+Shift+e exec xfce4-session-logout
