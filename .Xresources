@@ -49,7 +49,8 @@ URxvt.background: #f5f7fa
 
 ! Configuration for https://github.com/muennich/urxvt-perls
 ! and https://github.com/richo/rxvt-unicode/blob/master/src/perl/confirm-paste
-URxvt*perl-ext-common: confirm-paste,default,clipboard-shortcuts,url-select,keyboard-select
+!URxvt*perl-ext-common: confirm-paste,default,clipboard-shortcuts,url-select,keyboard-select
+URxvt*perl-ext-common: default,clipboard,url-select,keyboard-select
 URxvt.iso14755 : false
 
 URxvt.url-select.launcher:  firefox
