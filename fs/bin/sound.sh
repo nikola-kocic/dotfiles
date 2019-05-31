@@ -1,28 +1,28 @@
 #!/bin/bash
 
-VOLUME=$(pamixer --get-volume)
+SINK="alsa_output.pci-0000_00_1b.0.analog-stereo"
+BASE_CMD="pamixer --sink ${SINK}"
 VALUE=5
 
 case "$1" in
   "up")
-    [[ "$VOLUME" -eq 100 ]] && VALUE=0
-    pamixer --increase $VALUE
+    ${BASE_CMD} --increase ${VALUE}
     ;;
   "down")
-    pamixer --decrease $VALUE
+    ${BASE_CMD} --decrease ${VALUE}
     ;;
   "mute")
-    pamixer --toggle-mute
+    ${BASE_CMD} --toggle-mute
     ;;
 esac
 
 # notification
-VOLUME=$(pamixer --get-volume)
-MUTE=$(pamixer --get-mute)
+VOLUME=$(${BASE_CMD} --get-volume-human)
 
-if [ "$MUTE" == "false" ]; then
-  volnoti-show $VOLUME
+if [ "${VOLUME}" == "muted" ]; then
+  volnoti-show --mute
 else
-  volnoti-show -m $VOLUME
+  volnoti-show ${VOLUME}
 fi
 
+killall -s USR1 py3status

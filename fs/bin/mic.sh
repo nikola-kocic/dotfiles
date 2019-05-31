@@ -1,29 +1,33 @@
 #!/bin/bash
 
-CMD="pamixer --default-source"
-VOLUME=$(${CMD} --get-volume)
+BASE_CMD="pamixer --source alsa_input.pci-0000_00_1b.0.analog-stereo"
 VALUE=5
 
 case "$1" in
   "up")
-    [[ "$VOLUME" -eq 100 ]] && VALUE=0
-    ${CMD} --increase $VALUE
+    ${BASE_CMD} --increase ${VALUE}
     ;;
   "down")
-    ${CMD} --decrease $VALUE
+    ${BASE_CMD} --decrease ${VALUE}
     ;;
   "mute")
-    ${CMD} --toggle-mute
+    ${BASE_CMD} --toggle-mute
     ;;
 esac
 
 # notification
-VOLUME=$(${CMD} --get-volume)
-MUTE=$(${CMD} --get-mute)
+VOLUME=$(${BASE_CMD} --get-volume-human)
+VOLNOTI_ARGS="
+	-4 /usr/share/icons/HighContrast/256x256/status/microphone-sensitivity-high.png
+	-3 /usr/share/icons/HighContrast/256x256/status/microphone-sensitivity-medium.png
+	-2 /usr/share/icons/HighContrast/256x256/status/microphone-sensitivity-low.png
+	-1 /usr/share/icons/HighContrast/256x256/status/microphone-sensitivity-low.png
+	-0 /usr/share/icons/HighContrast/256x256/status/microphone-sensitivity-muted.png"
 
-if [ "$MUTE" == "false" ]; then
-  volnoti-show $VOLUME
+if [ "${VOLUME}" == "muted" ]; then
+  volnoti-show ${VOLNOTI_ARGS} --noprogress --mute
 else
-  volnoti-show -m $VOLUME
+  volnoti-show ${VOLNOTI_ARGS} ${VOLUME}
 fi
 
+killall -s USR1 py3status
