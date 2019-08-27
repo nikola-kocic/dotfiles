@@ -106,6 +106,7 @@ diskdata {
 }
 
 battery_level {
+	battery_id = all
 	format = "{icon} {percent}"
 	notify_low_level = True
 }
