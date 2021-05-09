@@ -1,1 +1,5 @@
+$include /etc/inputrc
+
 set enable-bracketed-paste on
+# Prevent altering history
+set revert-all-at-newline on
