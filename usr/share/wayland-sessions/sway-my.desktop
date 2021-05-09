@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Sway Customized
+Comment=An i3-compatible Wayland compositor
+# Non-sway specific variables are in ~/.config/environment.d/10-envvars.conf
+Exec=env MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=wayland SDL_VIDEODRIVER=wayland _JAVA_AWT_WM_NONREPARENTING=1 systemd-cat --identifier=sway sway
+Type=Application
+
+#Exec=env MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=wayland SDL_VIDEODRIVER=wayland DOTNET_CLI_TELEMETRY_OPTOUT=1 XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway sway
+#Exec=env MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=wayland SDL_VIDEODRIVER=wayland DOTNET_CLI_TELEMETRY_OPTOUT=1 XDG_CURRENT_DESKTOP=sway sway
+# XDG_CURRENT_DESKTOP is needed for xdg-desktop-portal-wlr: https://github.com/emersion/xdg-desktop-portal-wlr/blob/efcbcb60aa3bc46b0e290d5f6627783fbb534dcd/README.md#running
+# Update: maybe not really

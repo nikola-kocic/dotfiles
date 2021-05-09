@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Uses `v4l2loopback`
+# See https://wiki.archlinux.org/index.php/Screen_capture#Via_a_virtual_webcam_video_feed
+set -e
+vnum=10
+sudo modprobe -r v4l2loopback
+sudo modprobe v4l2loopback card_label=V4L2 video_nr=${vnum}
+dev="/dev/video${vnum}"
+#sudo v4l2-ctl -d "${dev}" -c sustain_framerate=1
+#v4l2loopback-ctl set-fps 30 "${dev}"
+#v4l2loopback-ctl set-caps "UYVY:1920x1080" "${dev}"
+#exec wf-recorder -g "$(slurp)" --muxer=v4l2 --codec=rawvideo -x yuv420p -f "/dev/video${vnum}" "$@"
+# Discord seems to accept only 16:9 webcam inputs
+exec wf-recorder --muxer=v4l2 --codec=rawvideo -x yuv420p -f "/dev/video${vnum}" "$@"
+#exec wf-recorder -g "0,0 1280x700" --muxer=v4l2 --codec=rawvideo -x yuv420p -f "/dev/video${vnum}" "$@"

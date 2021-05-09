@@ -1,0 +1,362 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys
+set $up l
+set $down k
+set $left j
+set $right semicolon
+# Your preferred terminal emulator
+set $term konsole
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+#set $menu dmenu_path | dmenu | xargs swaymsg exec --
+#set $menu j4-dmenu-desktop
+set $menu j4-dmenu-desktop --dmenu='bemenu -i -p "" --nb "#000000" --nf "#bbbbbb" --sb "#ffffff" --hb "#0000ff" --hf "#ffffff" --tf "#bbbbbb" --fn "SourceCodePro Medium 11"'
+
+#font pango:SourceCodePro Medium 10
+font DejaVu Sans Mono 9
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+# ViewSonic XG2401
+output HDMI-A-2 {
+    #resolution 1920x1080@143.996Hz position ,0
+    resolution 1920x1080@120.402000Hz position ,0
+    subpixel rgb
+}
+output * adaptive_sync on
+
+### Idle configuration
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' \
+#               resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+input * {
+    xkb_layout "usrsl,rs"
+    #xkb_variant "colemak,,typewriter"
+    xkb_options "grp:alt_space_toggle,caps:escape"
+    xkb_numlock enable
+    accel_profile flat
+    pointer_accel 0
+}
+
+
+### Key bindings
+#
+# Basics:
+#
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    bindsym --to-code {
+        # Start a terminal
+        $mod+Return exec $term
+
+        # Kill focused window
+        $mod+Shift+q kill
+
+        # Start your launcher
+        $mod+d exec $menu
+
+        # Reload the configuration file
+        $mod+Shift+c nop
+        --release $mod+Shift+c reload
+
+        # Exit sway (logs you out of your Wayland session)
+        $mod+Shift+e nop
+        --release $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    }
+
+#
+# Moving around:
+#
+    bindsym --to-code {
+        # Move your focus around
+        $mod+$left focus left
+        $mod+$down focus down
+        $mod+$up focus up
+        $mod+$right focus right
+        # Or use $mod+[up|down|left|right]
+        $mod+Left focus left
+        $mod+Down focus down
+        $mod+Up focus up
+        $mod+Right focus right
+
+        # Move the focused window with the same, but add Shift
+        $mod+Shift+$left move left
+        $mod+Shift+$down move down
+        $mod+Shift+$up move up
+        $mod+Shift+$right move right
+        # Ditto, with arrow keys
+        $mod+Shift+Left move left
+        $mod+Shift+Down move down
+        $mod+Shift+Up move up
+        $mod+Shift+Right move right
+    }
+
+#
+# Workspaces:
+#
+    # Define names for default workspaces for which we configure key bindings later on.
+    # We use variables to avoid repeating the names in multiple places.
+    set $ws1 "1:www"
+    set $ws2 "2:term"
+    set $ws3 "3:editor"
+    set $ws4 "4:comm"
+    set $ws5 "5:files"
+    set $ws6 "6"
+    set $ws7 "7"
+    set $ws8 "8:term-remote"
+    set $ws9 "9:git"
+    set $ws10 "10:ide"
+
+    bindsym --to-code {
+        # Switch to workspace
+        $mod+1 workspace $ws1
+        $mod+2 workspace $ws2
+        $mod+3 workspace $ws3
+        $mod+4 workspace $ws4
+        $mod+5 workspace $ws5
+        $mod+6 workspace $ws6
+        $mod+7 workspace $ws7
+        $mod+8 workspace $ws8
+        $mod+9 workspace $ws9
+        $mod+0 workspace $ws0
+        # Move focused container to workspace
+        $mod+Shift+1 move container to workspace $ws1
+        $mod+Shift+2 move container to workspace $ws2
+        $mod+Shift+3 move container to workspace $ws3
+        $mod+Shift+4 move container to workspace $ws4
+        $mod+Shift+5 move container to workspace $ws5
+        $mod+Shift+6 move container to workspace $ws6
+        $mod+Shift+7 move container to workspace $ws7
+        $mod+Shift+8 move container to workspace $ws8
+        $mod+Shift+9 move container to workspace $ws9
+        $mod+Shift+0 move container to workspace $ws10
+    }
+
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+h or $mod+g, for horizontal and vertical splits
+    # respectively.
+    bindsym --to-code {
+        $mod+h splith
+        $mod+v splitv
+
+        # Switch the current container between different layout styles
+        $mod+s layout stacking
+        $mod+w layout tabbed
+        $mod+e layout toggle split
+
+        # Make the current focus fullscreen
+        $mod+f fullscreen
+
+        # Toggle the current focus between tiling and floating mode
+        $mod+Shift+space floating toggle
+
+        # Swap focus between the tiling area and the floating area
+        $mod+space focus mode_toggle
+
+        # Move focus to the parent container
+        $mod+a focus parent
+    }
+
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+    bindsym --to-code {
+        # Move the currently focused window to the scratchpad
+        $mod+Shift+minus move scratchpad
+
+        # Show the next scratchpad window or hide the focused scratchpad window.
+        # If there are multiple scratchpad windows, this command cycles through them.
+        $mod+minus scratchpad show
+    }
+
+#
+# Resizing containers:
+#
+set $resize_step 100 px
+mode "resize" {
+    bindsym --to-code {
+        # left will shrink the containers width
+        # right will grow the containers width
+        # up will shrink the containers height
+        # down will grow the containers height
+        $left resize shrink width $resize_step
+        $down resize grow height $resize_step
+        $up resize shrink height $resize_step
+        $right resize grow width $resize_step
+
+        # Ditto, with arrow keys
+        Left resize shrink width $resize_step
+        Down resize grow height $resize_step
+        Up resize shrink height $resize_step
+        Right resize grow width $resize_step
+
+        # Return to default mode
+        Return mode "default"
+        Escape mode "default"
+    }
+}
+bindsym --to-code $mod+r mode "resize"
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    swaybar_command waybar
+    position bottom
+
+    ## When the status_command prints a new line to stdout, swaybar updates.
+    ## The default just shows the current date and time.
+    #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    status_command py3status --disable-click-events
+
+    #colors {
+    #    statusline #ffffff
+    #    background #323232
+    #    inactive_workspace #32323200 #32323200 #5c5c5c
+    #}
+}
+
+include /etc/sway/config.d/*
+
+workspace_layout tabbed
+hide_edge_borders both
+focus_follows_mouse no
+mouse_warping none
+show_marks yes
+
+# change focused container
+focus_wrapping yes
+
+# The middle button over a titlebar kills the window
+bindsym button2 nop
+bindsym --border --release button2 kill
+
+bindsym --to-code {
+    $mod+x                workspace back_and_forth
+
+    $mod+Tab              exec ~/fs/bin/i3-switch-tabs right
+    $mod+Shift+Tab        exec ~/fs/bin/i3-switch-tabs left
+
+    Mod1+F2               exec xfce4-appfinder
+    $mod+Shift+apostrophe exec /home/nikola/fs/bin/rofimojioverride/rofimoji
+    $mod+Shift+o          exec swaylock -c 002020
+    #Control+grave        exec clipman pick -t rofi
+    Control+grave         exec copyq show
+    #$mod+v               exec clipman pick -t rofi
+    #$mod+Ctrl+v          exec clipman clear -t rofi
+    Control+Shift+grave   exec makoctl restore
+}
+
+#
+# Audio controls
+#
+set $player audacious
+bindsym --to-code {
+    # XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
+    # XF86AudioLowerVolume exec pactl set-sink-volume 0 -- -5% #decrease sound volume
+    # XF86AudioMute        exec pactl set-sink-mute 0 toggle # mute sound
+    $mod+shift+bracketright   exec --no-startup-id ~/fs/bin/mic.sh up
+    $mod+shift+bracketleft    exec --no-startup-id ~/fs/bin/mic.sh down
+    $mod+shift+backslash      exec --no-startup-id ~/fs/bin/mic.sh mute
+    XF86AudioRaiseVolume      exec --no-startup-id ~/fs/bin/sound.sh up
+    $mod+bracketright         exec --no-startup-id ~/fs/bin/sound.sh up
+    XF86AudioLowerVolume      exec --no-startup-id ~/fs/bin/sound.sh down
+    $mod+bracketleft          exec --no-startup-id ~/fs/bin/sound.sh down
+    XF86AudioMute             exec --no-startup-id ~/fs/bin/sound.sh mute
+    $mod+backslash            exec --no-startup-id ~/fs/bin/sound.sh mute
+    $mod+Control+Home         exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c PlayPause
+    $mod+Control+End          exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Pause
+    $mod+Control+Next         exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Next
+    $mod+Control+Prior        exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Previous
+    $mod+Control+Right        exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Seek -a="5000000"
+    $mod+Control+Left         exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Seek -a="-5000000"
+    $mod+Control+Down         exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c OffsetVolume -a="-0.025"
+    $mod+Control+Up           exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c OffsetVolume -a="0.025"
+    #$mod+Control+bracketright exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="5" -c
+    #$mod+Control+bracketleft  exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="-5" -c
+    #$mod+Control+backslash    exec --no-startup-id ~/fs/bin/change-volume-of-active --mute -c
+}
+
+#
+# Misc
+#
+bindsym --to-code {
+    Print        exec --no-startup-id ~/fs/bin/screenshot-sway.sh fullscreen
+    Shift+Print  exec --no-startup-id ~/fs/bin/screenshot-sway.sh focused
+    $mod+Print   exec --no-startup-id ~/fs/bin/screenshot-sway.sh region
+}
+
+for_window [app_id=zenity] floating enable
+for_window [app_id=deluge title="Connection Manager"] resize set width 600 px height 400 px
+#for_window [app_id=firefox title="Extension: \(Tree Style Tab\) - Close tabs.*"] resize set width 300 px
+#for_window [app_id=firefox title="Extension: \(Tree Style Tab\) - Close tabs.*"] exec "notify-send test" #floating disable; floating enable
+#for_window [app_id=firefox title="Extension: \(Tree Style Tab\) - Close tabs.*"] exec "sleep 0.5; swaymsg floating toggle"
+for_window [app_id=firefox title="Launch Application"] floating enable
+for_window [title="Firefox — Sharing Indicator"] floating enable; resize set 1 1; move position 1705 px -15 px; sleep 1 && i3-msg focus tiling
+for_window [app_id=copyq] floating enable
+for_window [app_id=xfce4-appfinder] floating enable
+
+# TODO: Check if needed ( https://github.com/emersion/xdg-desktop-portal-wlr/tree/efcbcb60aa3bc46b0e290d5f6627783fbb534dcd#running )
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+#exec volnoti -t 1
+exec mako
+#exec wl-paste -t text --watch clipman store --max-items=100
+exec sleep 2 && copyq --start-server  # sleep due to https://github.com/hluk/CopyQ/issues/1635
+exec blueman-applet
+exec gammastep-indicator
+exec nm-applet --indicator
+exec polychromatic-tray-applet

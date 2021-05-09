@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Reverse-engineered from https://github.com/fdw/rofimoji/blob/7641ab2fbcfcf4146e8be35824ff80c184ff3396/src/picker/typer.py#L60
+
+if [ "${1}" == "type" ]; then
+    # echo "Typing"
+    if [ "${4}" == "" ]; then
+        # echo "Empty active window"
+        "/usr/bin/wtype" "${5}"
+        exit 0
+    fi
+fi
+
+"/usr/bin/xdotool" "$@"
