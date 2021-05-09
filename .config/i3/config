@@ -17,7 +17,9 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+#font pango:Source Code Pro Medium 9
+font pango:DejaVu Sans Mono 9
+#font pango:Source Code Pro Regular 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -39,7 +41,8 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec kitty
-bindsym $mod+Return exec urxvt
+#bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec konsole
 #bindsym $mod+Return exec termite
 
 # kill focused window
@@ -164,16 +167,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym $left       resize shrink width 10 px or 5 ppt
+        bindsym $down       resize grow height 10 px or 5 ppt
+        bindsym $up         resize shrink height 10 px or 5 ppt
+        bindsym $right      resize grow width 10 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym Left        resize shrink width 10 px or 5 ppt
+        bindsym Down        resize grow height 10 px or 5 ppt
+        bindsym Up          resize shrink height 10 px or 5 ppt
+        bindsym Right       resize grow width 10 px or 5 ppt
 
         # back to normal: Enter or Escape or Mod1+r
         bindsym Return mode "default"
@@ -202,10 +205,11 @@ set $screen_right eDP1
 # finds out, if available)
 bar {
 #        status_command i3status
+        #status_command py3status --disable-click-events -d
+        status_command py3status --disable-click-events
 #        status_command ~/fs/bin/i3-bw 1 /sys/class/net/enp5s0/statistics/rx_bytes /sys/class/net/enp5s0/statistics/tx_bytes
+        #status_command SCRIPT_DIR=/home/nikola/dev/repos/i3blocks-contrib i3blocks
 #        status_command $HOME/fs/bin/conky-i3bar
-        status_command py3status
-#        status_command i3blocks
         tray_output $screen_left
 }
 
@@ -251,7 +255,7 @@ bindsym --release button2 kill
 bindsym button2 nop
 
 # change focused container
-force_focus_wrapping yes
+focus_wrapping yes
 bindsym $mod+Tab exec ~/fs/bin/i3-switch-tabs right
 bindsym $mod+Shift+Tab exec ~/fs/bin/i3-switch-tabs left
 bindsym $mod+Ctrl+Tab exec quickswitch
@@ -262,23 +266,21 @@ bindsym $mod+period move workspace to output right
 bindsym $mod+z [urgent=latest] focus
 bindsym $mod+x workspace back_and_forth
 bindsym Mod1+F2 exec xfce4-appfinder
-bindsym $mod+Shift+o exec i3lock --show-failed-attempts --color=002020
+bindsym $mod+Shift+apostrophe exec rofimoji
+bindsym $mod+Shift+o exec i3lock -c 002020
 bindsym $mod+Shift+p exec lxdm -c USER_SWITCH
 
 exec "[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources"
-
-# Gnome Session
-#exec --no-startup-id /usr/lib/gsd-xsettings
-#exec --no-startup-id gnome-flashback
-
+exec --no-startup-id numlockx
+exec --no-startup-id /usr/bin/lxsession
 exec nm-applet
 exec copyq
-exec volnoti --timeout 1
+exec volnoti -t 1
 #exec setxkbmap usrsl
 # replaced by $ sudo localectl --no-convert set-x11-keymap usrsl,rs grp:alt_space_toggle
-#exec setxkbmap -layout usrsl,rs -option grp:alt_space_toggle
-#exec setxkbmap -option altwin:swap_alt_win
+exec setxkbmap -layout usrsl,rs -option grp:alt_space_toggle -option caps:escape
 exec --no-startup-id hsetroot -solid "#000"
+exec --no-startup-id dunst
 
 exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" 290 1' # Natural scroll
 exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" 298 {0 1}' # Click Methods "buttonareas", "clickfinger"
@@ -287,28 +289,40 @@ exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" 298 {0 1}' # 
 #bindsym $mod+Shift+e exec xfce4-session-logout
 # xfce settings
 #bindsym $mod+Shift+s exec xfce4-settings-manager
-bindsym $mod+shift+bracketright    exec --no-startup-id ~/fs/bin/mic.sh up
-bindsym $mod+shift+bracketleft     exec --no-startup-id ~/fs/bin/mic.sh down
-bindsym $mod+shift+backslash       exec --no-startup-id ~/fs/bin/mic.sh mute
-bindsym XF86AudioRaiseVolume       exec --no-startup-id ~/fs/bin/sound.sh up
-bindsym $mod+bracketright          exec --no-startup-id ~/fs/bin/sound.sh up
+
+#
+# Pulse Audio controls
+#
+#set $player cantata
+set $player audacious
+# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
+# bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -- -5% #decrease sound volume
+# bindsym XF86AudioMute        exec pactl set-sink-mute 0 toggle # mute sound
+bindsym $mod+shift+bracketright  exec --no-startup-id ~/fs/bin/mic.sh up
+#bindcode 193                     exec --no-startup-id ~/fs/bin/mic.sh up  # F14
+bindsym $mod+shift+bracketleft   exec --no-startup-id ~/fs/bin/mic.sh down
+#bindcode 192                     exec --no-startup-id ~/fs/bin/mic.sh down  # F15
+bindsym $mod+shift+backslash     exec --no-startup-id ~/fs/bin/mic.sh mute
+#bindcode 191                     exec --no-startup-id ~/fs/bin/mic.sh mute  # F13
+bindsym XF86AudioRaiseVolume     exec --no-startup-id ~/fs/bin/sound.sh up
+bindsym $mod+bracketright        exec --no-startup-id ~/fs/bin/sound.sh up
 bindsym $mod+Control+bracketright  exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="5" -c
-bindsym XF86AudioLowerVolume       exec --no-startup-id ~/fs/bin/sound.sh down
-bindsym $mod+bracketleft           exec --no-startup-id ~/fs/bin/sound.sh down
-bindsym $mod+Control+bracketleft   exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="-5" -c
-bindsym XF86AudioMute              exec --no-startup-id ~/fs/bin/sound.sh mute
-bindsym $mod+backslash             exec --no-startup-id ~/fs/bin/sound.sh mute
-bindsym $mod+Control+backslash     exec --no-startup-id ~/fs/bin/change-volume-of-active --mute -c
-bindsym Print                      exec --no-startup-id ~/fs/bin/screenshot.sh
-bindsym Shift+Print                exec --no-startup-id ~/fs/bin/screenshot.sh -u
-#bindsym Mod1+Print                exec --no-startup-id ~/fs/bin/screenshot.sh -s
-bindsym $mod+Control+Home          exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c PlayPause
-bindsym $mod+Control+End           exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Pause
-bindsym $mod+Control+Next          exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Next
-bindsym $mod+Control+Prior         exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Previous
-bindsym $mod+Control+Right         exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Seek -a="5000000"
-bindsym $mod+Control+Left          exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c Seek -a="-5000000"
-bindsym $mod+Control+Down          exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c OffsetVolume -a="-0.025"
-bindsym $mod+Control+Up            exec --no-startup-id ~/fs/bin/mediaplayer-control -p audacious -c OffsetVolume -a="0.025"
-bindsym XF86MonBrightnessUp        exec --no-startup-id ~/fs/bin/brightness.sh up
-bindsym XF86MonBrightnessDown      exec --no-startup-id ~/fs/bin/brightness.sh down
+bindsym XF86AudioLowerVolume     exec --no-startup-id ~/fs/bin/sound.sh down
+bindsym $mod+bracketleft         exec --no-startup-id ~/fs/bin/sound.sh down
+bindsym $mod+Control+bracketleft  exec --no-startup-id ~/fs/bin/change-volume-of-active --volume="-5" -c
+bindsym XF86AudioMute            exec --no-startup-id ~/fs/bin/sound.sh mute
+bindsym $mod+backslash           exec --no-startup-id ~/fs/bin/sound.sh mute
+bindsym $mod+Control+backslash   exec --no-startup-id ~/fs/bin/change-volume-of-active --mute -c
+bindsym Print                    exec --no-startup-id ~/fs/bin/screenshot.sh
+bindsym Shift+Print              exec --no-startup-id ~/fs/bin/screenshot.sh --focused
+#bindsym Mod1+Print              exec --no-startup-id ~/fs/bin/screenshot.sh --select
+bindsym $mod+Control+Home        exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c PlayPause
+bindsym $mod+Control+End         exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Pause
+bindsym $mod+Control+Next        exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Next
+bindsym $mod+Control+Prior       exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Previous
+bindsym $mod+Control+Right       exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Seek -a="5000000"
+bindsym $mod+Control+Left        exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c Seek -a="-5000000"
+bindsym $mod+Control+Down        exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c OffsetVolume -a="-0.025"
+bindsym $mod+Control+Up          exec --no-startup-id ~/fs/bin/mediaplayer-control -p $player -c OffsetVolume -a="0.025"
+#bindcode Control+49              exec --no-startup-id gpaste-client ui  # ctrl+backtick
+bindcode Control+49              exec --no-startup-id copyq show  # ctrl+backtick
