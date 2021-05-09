@@ -21,13 +21,8 @@ function show_name {
 export PROMPT_COMMAND=${PROMPT_COMMAND:+${PROMPT_COMMAND%%;*( )};}'show_name'
 
 
-export GIT_EDITOR="vim"
-export EDITOR='vim'
-export VISUAL='vim'
-export MAKEFLAGS=-j5
 export PYTHONDONTWRITEBYTECODE=1 # disable creation of pyc files
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
-export CONAN_COLOR_DARK=1
 # Don't show error "Couldn't connect to accessibility bus: Failed to connect to socket..."
 export NO_AT_BRIDGE=1
 
@@ -36,7 +31,6 @@ export PATH="/usr/lib/ccache/bin:${PATH}"
 export PATH="${HOME}/.cargo/bin:${PATH}"
 export PATH="${HOME}/fs/.node_modules/bin:${PATH}"
 
-export PAGER=less
 #export LESS="-R -i -j4"
 #export LESS="-R -j4 -iMSx4 -FX"
 export LESS="--RAW-CONTROL-CHARS --jump-target=4 --ignore-case"
