@@ -40,6 +40,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 output HDMI-A-2 {
     #resolution 1920x1080@143.996Hz position ,0
     resolution 1920x1080@120.402000Hz position ,0
+#    resolution 1920x1080@60.000Hz position ,0
     subpixel rgb
 }
 output * adaptive_sync on
@@ -349,8 +350,6 @@ for_window [title="Firefox — Sharing Indicator"] floating enable; resize set 1
 for_window [app_id=copyq] floating enable
 for_window [app_id=xfce4-appfinder] floating enable
 
-# TODO: Check if needed ( https://github.com/emersion/xdg-desktop-portal-wlr/tree/efcbcb60aa3bc46b0e290d5f6627783fbb534dcd#running )
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 #exec volnoti -t 1
 exec mako
@@ -360,3 +359,13 @@ exec blueman-applet
 exec gammastep-indicator
 exec nm-applet --indicator
 exec polychromatic-tray-applet
+
+
+# DISPLAY, WAYLAND_DISPLAY and SWAYSOCK as per https://github.com/archlinux/svntogit-community/blob/66721051a7e529a909927df2e7d61f27ac127d58/trunk/50-systemd-user.conf
+# WAYLAND_DISPLAY and XDG_CURRENT_DESKTOP as per https://github.com/emersion/xdg-desktop-portal-wlr/tree/efcbcb60aa3bc46b0e290d5f6627783fbb534dcd#running
+# and https://github.com/emersion/xdg-desktop-portal-wlr/issues/42
+# MOZ_DBUS_REMOTE as per https://github.com/flatpak/xdg-desktop-portal/issues/285#issuecomment-665109459
+set $imp_vars "DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE MOZ_DBUS_REMOTE"
+exec_always systemctl --user import-environment "$imp_vars"
+exec_always hash dbus-update-activation-environment 2>/dev/null && \
+    dbus-update-activation-environment --systemd "$imp_vars"

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+ENV_VALS=(
+    XDG_CURRENT_DESKTOP=sway  # https://github.com/emersion/xdg-desktop-portal-wlr/tree/efcbcb60aa3bc46b0e290d5f6627783fbb534dcd#running
+    MOZ_ENABLE_WAYLAND=1  # https://wiki.archlinux.org/index.php?title=Firefox&oldid=670217#Wayland
+    MOZ_DBUS_REMOTE=1     # https://wiki.archlinux.org/index.php?title=Firefox&oldid=670217#Applications_on_Wayland_can_not_launch_Firefox
+    QT_QPA_PLATFORM=wayland     # https://wiki.archlinux.org/index.php?title=Wayland&oldid=666811#Qt
+    QT_QPA_PLATFORMTHEME=qt5ct  # https://wiki.archlinux.org/index.php?title=Wayland&oldid=666811#Qt
+    #SDL_VIDEODRIVER=wayland  # https://wiki.archlinux.org/index.php?title=Wayland&oldid=666811#SDL2
+    _JAVA_AWT_WM_NONREPARENTING=1  # https://wiki.archlinux.org/index.php?title=Sway&oldid=667841#Java_applications
+    systemd-cat --identifier=sway  # https://github.com/swaywm/sway/wiki/Systemd-integration/28bc21ff10ff6e0ba0201cf5fc2adbc9860d5a42#sway-logging-and-journalctl
+)
+
+env "${ENV_VALS[@]}" sway
