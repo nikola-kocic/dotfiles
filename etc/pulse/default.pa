@@ -148,7 +148,6 @@ set-default-sink alsa_output.usb-Yamaha_Corporation_Steinberg_UR22mkII-00.iec958
 
 # Set up echo cancel streams and make them default
 #load-module module-echo-cancel use_master_format=1 aec_method=webrtc aec_args="analog_gain_control=0 digital_gain_control=0" source_name=echoCancel_source sink_name=echoCancel_sink source_master=stereo_ur22mk2_input sink_master=alsa_output.pci-0000_00_1f.3.analog-stereo
-#load-module module-echo-cancel use_master_format=1 aec_method=webrtc aec_args="analog_gain_control=0 digital_gain_control=0" source_name=echoCancel_source sink_name=echoCancel_sink source_master=stereo_ur22mk2_input sink_master=alsa_output.usb-Yamaha_Corporation_Steinberg_UR22mkII-00.iec958-stereo
-load-module module-echo-cancel use_master_format=1 aec_method=webrtc aec_args="analog_gain_control=0 digital_gain_control=0 noise_suppression=0 voice_detection=0" source_name=echoCancel_source sink_name=echoCancel_sink source_master=stereo_ur22mk2_input sink_master=alsa_output.usb-Yamaha_Corporation_Steinberg_UR22mkII-00.iec958-stereo
+load-module module-echo-cancel use_master_format=1 aec_method=webrtc aec_args="analog_gain_control=0 digital_gain_control=0" source_name=echoCancel_source sink_name=echoCancel_sink source_master=stereo_ur22mk2_input sink_master=alsa_output.usb-Yamaha_Corporation_Steinberg_UR22mkII-00.iec958-stereo
 set-default-source echoCancel_source
 set-default-sink echoCancel_sink
