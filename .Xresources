@@ -28,11 +28,14 @@ xscreensaver.dateFormat:    %I:%M%P %a %b %d, %Y
 
 Xft.antialias: 1
 Xft.autohint: 0
-Xft.dpi: 96
+Xft.dpi: 192
 Xft.hinting: 1
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
+
+Xcursor.size: 48
+Xcursor.theme: capitaine-cursors
 
 URxvt.font: xft:Monospace:pixelsize=12:style=regular:antialias=true:hinting=true,xft:Symbola,xft:Noto Emoji
 URxvt*scrollstyle: plain
