@@ -246,6 +246,7 @@ hide_edge_borders both
 focus_follows_mouse no
 mouse_warping none
 show_marks yes
+for_window [all] title_window_icon on
 
 # Focus last active container window when left clicking
 bindsym --release button1 focus child;focus child;focus child
